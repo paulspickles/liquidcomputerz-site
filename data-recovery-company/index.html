@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Best Data Recovery Company – LiquidComputerz</title>
+  <meta name="description" content="A short briefing on data recovery: what you need, the procedure, and the most important rules, such as never writing over lost data. Contact LiquidComputerz for recovery assistance at (561) 866-3035.">
+  <link rel="canonical" href="https://liquidcomputerz.com/data-recovery-company/">
+  <link rel="icon" href="https://liquidcomputerz.com/wp-content/uploads/2021/12/cropped-new-2.png?w=32" sizes="32x32">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Pixelify+Sans:wght@500;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="../assets/tailwind-config.js"></script>
+  <link rel="stylesheet" href="../assets/site.css">
+  <style>
+    
+  </style>
+
+  <style>
+    .scan-bg { background-image: repeating-linear-gradient(to bottom, rgba(230,178,90,.05) 0 1px, transparent 1px 4px); }
+    .console { border: 2px solid #4a3719; background: #0b0805; box-shadow: 8px 8px 0 #5c370b; font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; }
+    .sectors { display: grid; grid-template-columns: repeat(16, 1fr); gap: 3px; }
+    .sectors i { aspect-ratio: 1; background: #e6b25a; transition: background .25s, box-shadow .25s; }
+    .sectors i.bad { background: #6b2b1c; }
+    .sectors i.fix { background: #ffe2a3; box-shadow: 0 0 8px #f2a93b; }
+    .bar { height: 10px; border: 1px solid #4a3719; background: #14100a; }
+    .bar > div { height: 100%; width: 100%; background: #e6b25a; }
+    .hazard::before { content: ""; display: block; height: 8px; background: repeating-linear-gradient(-45deg, #e6b25a 0 8px, #14100a 8px 16px); }
+    .tl { border-left: 3px solid #4a3719; margin-left: 10px; }
+    .tl > li { position: relative; padding-left: 2rem; padding-bottom: 2rem; }
+    .tl > li:last-child { padding-bottom: 0; }
+    .tl > li::before { content: ""; position: absolute; left: -11px; top: .45rem; width: 19px; height: 19px; background: #e6b25a; border: 4px solid #14100a; }
+    summary::-webkit-details-marker { display: none; }
+    .tag { cursor: help; transition: transform .18s cubic-bezier(.2,.8,.2,1), border-color .18s, box-shadow .18s, color .18s; }
+    .tag:hover, .tag:focus { transform: translateY(-4px) scale(1.08); border-color: #e6b25a; color: #e6b25a; box-shadow: 4px 4px 0 #5c370b; z-index: 20; outline: none; }
+    .tag:focus-visible { outline: 3px solid #f2a93b; outline-offset: 3px; }
+    .tip { position: absolute; bottom: calc(100% + 14px); left: 50%; width: max-content; max-width: min(17rem, 84vw); transform: translateX(calc(-50% + var(--dx, 0px))) translateY(6px); padding: .75rem .9rem; background: #1e1710; color: #f1e4c9; border: 2px solid #e6b25a; box-shadow: 4px 4px 0 #5c370b; font-weight: 400; font-size: .875rem; line-height: 1.45; text-align: left; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .15s, transform .18s, visibility .15s; }
+    .tip::after { content: ""; position: absolute; top: 100%; left: calc(50% - var(--dx, 0px)); margin-left: -7px; border: 7px solid transparent; border-top-color: #e6b25a; }
+    .tag:hover .tip, .tag:focus .tip { opacity: 1; visibility: visible; transform: translateX(calc(-50% + var(--dx, 0px))) translateY(0); }
+    @media (prefers-reduced-motion: reduce) { .tag, .tip { transition: none; } }
+  </style>
+</head>
+
+<body class="bg-bg text-cream font-sans antialiased leading-relaxed">
+  <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-50 focus:bg-cream focus:text-bg focus:px-4 focus:py-2">Skip to content</a>
+  <div id="site-header"><noscript><p style="padding:1rem;text-align:center"><a href="../">Home</a> | <a href="../contact/">Contact</a> | Call 561-866-3035</p></noscript></div>
+
+  <main id="main">
+    <section class="scan-bg border-b-2 border-rim">
+      <div class="mx-auto max-w-6xl px-5 py-16 md:py-24 grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <p class="font-sans font-semibold text-lg tracking-wide text-gold">Short briefing</p>
+          <h1 class="mt-3 font-sans font-semibold text-4xl sm:text-5xl leading-[1.1] tracking-tight text-cream">Introduction to <span class="text-gold">data recovery</span></h1>
+          <p class="mt-2 text-sm text-dim">April 8, 2023</p>
+          <p class="mt-6 max-w-xl text-lg text-dim">Lost or deleted data? Here is what you need, how recovery works, and the most important things to know before you touch the drive.</p>
+          <div class="mt-8 flex flex-wrap gap-4">
+            <a href="../contact/" class="px-btn bg-gold text-bg font-semibold px-6 py-3">Contact now for recovery assistance</a>
+            <a href="tel:+15618663035" class="px-btn border-2 border-gold text-gold font-semibold px-6 py-3 bg-bg">Call (561) 866-3035</a>
+          </div>
+        </div>
+        <div class="console p-5" role="img" aria-label="Animation of a drive being scanned while its damaged sectors are recovered">
+          <p class="text-sm text-gold">&gt; recover --drive C:</p>
+          <div class="sectors mt-4" id="sectors" aria-hidden="true"></div>
+          <div class="bar mt-4" aria-hidden="true"><div id="scan-bar"></div></div>
+          <p class="mt-2 text-sm text-dim"><span id="scan-pct">100%</span> recovered</p>
+          <pre id="scan-log" class="mt-3 min-h-[3.9rem] whitespace-pre-wrap text-xs text-dim" aria-hidden="true">&gt; recovery complete</pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-6xl px-5 py-16 md:py-20" aria-labelledby="rules-heading">
+      <h2 id="rules-heading" class="font-pixel font-bold text-3xl md:text-4xl text-gold">The most important things to know</h2>
+      <ul class="mt-10 grid sm:grid-cols-2 gap-6"><li class="hazard border-2 border-rim bg-panel/90"><div class="p-5"><p class="font-sans font-semibold tracking-wide text-gold">Rule 1</p><h3 class="mt-1 font-sans font-semibold text-xl text-cream">Don't write over lost or deleted data</h3><p class="mt-2 text-dim">In other words, do not create any new data on the problem drive.</p></div></li><li class="hazard border-2 border-rim bg-panel/90"><div class="p-5"><p class="font-sans font-semibold tracking-wide text-gold">Rule 2</p><h3 class="mt-1 font-sans font-semibold text-xl text-cream">Don't do any work on the original hard drive</h3><p class="mt-2 text-dim">Always, again always, make a clone of the original before proceeding with any work.</p></div></li><li class="hazard border-2 border-rim bg-panel/90"><div class="p-5"><p class="font-sans font-semibold tracking-wide text-gold">Rule 3</p><h3 class="mt-1 font-sans font-semibold text-xl text-cream">Record keeping is key</h3><p class="mt-2 text-dim">Always keep a record of the work you do and the condition the device arrives in.</p></div></li><li class="hazard border-2 border-rim bg-panel/90"><div class="p-5"><p class="font-sans font-semibold tracking-wide text-gold">Rule 4</p><h3 class="mt-1 font-sans font-semibold text-xl text-cream">There are no guarantees</h3><p class="mt-2 text-dim">Always inform the customer or client that there are no guarantees with data recovery. We generally cannot confirm what data is on the drive before we start working, so any data recovered is considered a successful recovery.</p></div></li></ul>
+    </section>
+
+    <section class="bg-panel border-y-2 border-rim" aria-labelledby="need-heading">
+      <div class="mx-auto max-w-6xl px-5 py-14 md:py-16">
+        <h2 id="need-heading" class="font-pixel font-bold text-3xl md:text-4xl text-gold">Things you'll need</h2>
+        <ul class="mt-10 flex flex-wrap gap-3"><li class="tag relative border-2 border-rim bg-bg px-4 py-2 font-semibold" tabindex="0" aria-describedby="tip-0">Gull<span id="tip-0" role="tooltip" class="tip">Staying hopeful and trusting the process, even when the odds feel uncertain.</span></li><li class="tag relative border-2 border-rim bg-bg px-4 py-2 font-semibold" tabindex="0" aria-describedby="tip-1">Confidence<span id="tip-1" role="tooltip" class="tip">A steady belief that you can handle the job. Careful, calm work beats rushing or guessing.</span></li><li class="tag relative border-2 border-rim bg-bg px-4 py-2 font-semibold" tabindex="0" aria-describedby="tip-2">An internet-connected device<span id="tip-2" role="tooltip" class="tip">A computer, tablet or phone that can get online, used to look up instructions, download recovery software and stay in touch with us.</span></li><li class="tag relative border-2 border-rim bg-bg px-4 py-2 font-semibold" tabindex="0" aria-describedby="tip-3">Patience and time<span id="tip-3" role="tooltip" class="tip">Recovery can't be hurried. Cloning and scanning a drive can take a long time, and rushing risks losing data.</span></li><li class="tag relative border-2 border-rim bg-bg px-4 py-2 font-semibold" tabindex="0" aria-describedby="tip-4">Screwdrivers<span id="tip-4" role="tooltip" class="tip">Small precision screwdrivers, used to open a computer case and take a drive out of its housing.</span></li><li class="tag relative border-2 border-rim bg-bg px-4 py-2 font-semibold" tabindex="0" aria-describedby="tip-5">Common sense<span id="tip-5" role="tooltip" class="tip">Good judgment. For example, stop using a problem drive right away and never save new files onto it.</span></li><li class="tag relative border-2 border-rim bg-bg px-4 py-2 font-semibold" tabindex="0" aria-describedby="tip-6">Gloves<span id="tip-6" role="tooltip" class="tip">They protect your hands and keep fingerprints, oil and static off the drive and its parts.</span></li><li class="tag relative border-2 border-rim bg-bg px-4 py-2 font-semibold" tabindex="0" aria-describedby="tip-7">Probably parts<span id="tip-7" role="tooltip" class="tip">Replacement parts, such as a power board or a new outer casing, may be needed to get the drive working again.</span></li></ul>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-6xl px-5 py-16 md:py-20" aria-labelledby="proc-heading">
+      <h2 id="proc-heading" class="font-pixel font-bold text-3xl md:text-4xl text-gold">Procedure for data recovery</h2>
+      <ol class="tl mt-10 max-w-3xl"><li><p class="font-sans font-semibold tracking-wide text-gold">Step 1 · Inspect</p><p class="mt-1">Inspect the drive for damage. Record the damage, as well as the state of the drive and/or device.</p></li><li><p class="font-sans font-semibold tracking-wide text-gold">Step 2 · Clone</p><p class="mt-1">Attempt, or successfully complete, a clone of the drive.</p></li><li><p class="font-sans font-semibold tracking-wide text-gold">Step 3 · Power</p><p class="mt-1">If the drive does not have power, locate the board or mechanism that provides power and replace it, such as a power board. The culprit may also be the power source before the hard drive, such as a wall outlet or a power supply unit.</p></li><li><p class="font-sans font-semibold tracking-wide text-gold">Step 4 · Locate</p><p class="mt-1">If the drive receives power but the computer cannot locate it, clone the drive and run software to locate the missing information.</p></li><li><p class="font-sans font-semibold tracking-wide text-gold">Step 5 · Casing</p><p class="mt-1">If the drive cannot be found and the data cannot be located, swapping the outer casing of the drive for a new one may be necessary to get the hard drive disk to read.</p><p class="mt-3 border-2 border-gold bg-panel/90 p-3 font-semibold text-cream">We do not recommend any attempt to open or change parts on a hard drive. This is solely informational.</p></li></ol>
+    </section>
+
+    <section class="bg-panel border-y-2 border-rim" aria-labelledby="faq-heading">
+      <div class="mx-auto max-w-4xl px-5 py-16 md:py-20">
+        <h2 id="faq-heading" class="font-pixel font-bold text-3xl md:text-4xl text-gold">Common questions answered</h2>
+        <div class="mt-8 space-y-4">
+          <details class="group border-2 border-rim bg-bg">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 font-semibold">What do you mean by writing data?<span class="font-pixel text-2xl text-gold transition-transform group-open:rotate-45" aria-hidden="true">+</span></summary>
+            <p class="px-5 pb-5 text-dim">Writing data to a drive is the same as creating or inputting data on a drive.</p>
+          </details>
+          <details class="group border-2 border-rim bg-bg">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 font-semibold">What is a drive?<span class="font-pixel text-2xl text-gold transition-transform group-open:rotate-45" aria-hidden="true">+</span></summary>
+            <p class="px-5 pb-5 text-dim">A drive is a letter on your computer, such as the C: drive or E: or D: and so on. The drive letter corresponds to a device plugged in or virtually input on that drive, such as a hard drive or a connected device. In some cases it can even be a software program input on the drive.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-6xl px-5 py-16 md:py-20 grid md:grid-cols-3 gap-10 items-start" aria-labelledby="bio-heading">
+      <div>
+        <div class="border-2 border-rim bg-panel shadow-[6px_6px_0_#5c370b] aspect-square max-w-[225px] relative">
+          <span class="absolute inset-0 grid place-items-center font-pixel text-5xl text-gold" aria-hidden="true">AK</span>
+          <img src="../images/anthony-kron.jpg" alt="Anthony Kron headshot" width="225" height="225" loading="lazy" class="absolute inset-0 h-full w-full object-cover" onerror="this.style.display='none'">
+        </div>
+      </div>
+      <div class="md:col-span-2">
+        <h2 id="bio-heading" class="font-pixel font-bold text-3xl text-gold">Anthony Kron</h2>
+        <p class="mt-1 font-semibold">President at LiquidComputerz</p>
+        <p class="mt-4">Internet technology has become second nature to me, and it revolves around my life. Every day I see thousands of problems and a variety of solutions to each and every problem that can be achieved by a simple systematic approach and a simple discussion, given the time.</p>
+        <p class="mt-4">I believe in being the jack of all trades, the master of them all. As a few people once referenced in a different manner, it's not about always knowing the answer and the best solution, it's about surrounding yourself with people who can help you locate the answer.</p>
+        <div class="mt-8 flex flex-wrap gap-4">
+          <a href="../contact/" class="px-btn bg-gold text-bg font-semibold px-6 py-3">Contact now for recovery assistance</a>
+          <a href="tel:+15618663035" class="px-btn border-2 border-gold text-gold font-semibold px-6 py-3 bg-bg">Call (561) 866-3035</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="../assets/site.js"></script>
+  <script>
+    (function () {
+      document.querySelectorAll('.tag').forEach(function (tag) {
+        var tip = tag.querySelector('.tip');
+        function fit() {
+          tip.style.setProperty('--dx', '0px');
+          var r = tip.getBoundingClientRect(), dx = 0;
+          if (r.left < 8) dx = 8 - r.left; else if (r.right > window.innerWidth - 8) dx = window.innerWidth - 8 - r.right;
+          tip.style.setProperty('--dx', dx + 'px');
+        }
+        tag.addEventListener('mouseenter', fit); tag.addEventListener('focus', fit);
+      });
+      var grid = document.getElementById('sectors'), pct = document.getElementById('scan-pct'), bar = document.getElementById('scan-bar'), log = document.getElementById('scan-log');
+      if (!grid) return;
+      var N = 96, cells = [], i, k = 0, timer = 0, lines = [];
+      for (i = 0; i < N; i++) { var c = document.createElement('i'); grid.appendChild(c); cells.push(c); }
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var msgs = { 0: '> inspecting drive... done', 24: '> cloning drive... done', 52: '> locating missing data...', 80: '> data located', 99: '> recovery complete' };
+      function say(t) { lines.push(t); if (lines.length > 3) lines.shift(); log.textContent = lines.join('\n'); }
+      function start() {
+        for (i = 0; i < N; i++) cells[i].className = Math.random() < 0.35 ? 'bad' : '';
+        k = 0; lines = []; pct.textContent = '0%'; bar.style.width = '0%';
+        timer = setInterval(step, 55);
+      }
+      function step() {
+        if (cells[k].className === 'bad') { cells[k].className = 'fix'; (function (c) { setTimeout(function () { c.className = ''; }, 300); })(cells[k]); }
+        var p = Math.round((k + 1) / N * 100); pct.textContent = p + '%'; bar.style.width = p + '%';
+        if (msgs[Math.floor(k / N * 100)] && lines.indexOf(msgs[Math.floor(k / N * 100)]) < 0) say(msgs[Math.floor(k / N * 100)]);
+        k++;
+        if (k >= N) { clearInterval(timer); say(msgs[99]); setTimeout(start, 3500); }
+      }
+      start();
+    })();
+  </script>
+</body>
+</html>

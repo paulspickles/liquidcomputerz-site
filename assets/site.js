@@ -117,13 +117,29 @@
     host.insertBefore(cv, host.firstChild);
     var ctx = cv.getContext && cv.getContext('2d');
     if (!ctx) return;
-    var STEP = 14, RADIUS = 130, TAU = (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) ? 1 : 500;
-    var cols = 0, rows = 0, lit = new Float32Array(0), raf = 0, last = 0;
+    var BLOCKS = host.getAttribute('data-dot-trail') === 'blocks', STEP = BLOCKS ? 28 : 14, RADIUS = BLOCKS ? 150 : 130, TAU = (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) ? 1 : (BLOCKS ? 700 : 500);
+    var cols = 0, rows = 0, lit = new Float32Array(0), raf = 0, last = 0, px = null, py = null;
     function size() {
       var w = host.clientWidth, h = host.clientHeight, dpr = window.devicePixelRatio || 1;
       cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       cols = Math.ceil(w / STEP); rows = Math.ceil(h / STEP); lit = new Float32Array(cols * rows);
+    }
+    function drawBlock(i, j, b) {
+      var x0 = i * STEP + 1, y0 = j * STEP + 1, s = STEP - 1, L = 6 * b;
+      ctx.save();
+      ctx.fillStyle = 'rgba(0,0,0,' + (0.4 * b).toFixed(3) + ')';
+      ctx.fillRect(x0 + L * 0.9, y0 + L * 0.9, s, s);
+      ctx.fillStyle = 'rgba(122,78,20,' + (0.95 * b).toFixed(3) + ')';
+      ctx.beginPath(); ctx.moveTo(x0 + s, y0); ctx.lineTo(x0 + s - L, y0 - L); ctx.lineTo(x0 + s - L, y0 + s - L); ctx.lineTo(x0 + s, y0 + s); ctx.closePath(); ctx.fill();
+      ctx.beginPath(); ctx.moveTo(x0, y0 + s); ctx.lineTo(x0 - L, y0 + s - L); ctx.lineTo(x0 + s - L, y0 + s - L); ctx.lineTo(x0 + s, y0 + s); ctx.closePath(); ctx.fill();
+      ctx.shadowColor = 'rgba(242,169,59,' + (0.85 * b).toFixed(3) + ')'; ctx.shadowBlur = 14 * b;
+      ctx.fillStyle = 'rgba(230,178,90,' + (0.28 + 0.55 * b).toFixed(3) + ')';
+      ctx.fillRect(x0 - L, y0 - L, s, s);
+      ctx.shadowBlur = 0;
+      ctx.strokeStyle = 'rgba(255,214,130,' + (0.9 * b).toFixed(3) + ')';
+      ctx.strokeRect(x0 - L + 0.5, y0 - L + 0.5, s - 1, s - 1);
+      ctx.restore();
     }
     function frame(t) {
       var k = Math.exp(-Math.min(t - last, 64) / TAU), alive = false;
@@ -134,8 +150,12 @@
           var n = j * cols + i, b = lit[n];
           if (b > 0.015) {
             b *= k; lit[n] = b; alive = true;
-            ctx.fillStyle = 'rgba(255,196,92,' + b.toFixed(3) + ')';
-            ctx.beginPath(); ctx.arc(i * STEP + 7, j * STEP + 7, 1.4 + 1.1 * b, 0, 6.2832); ctx.fill();
+            if (BLOCKS) {
+              drawBlock(i, j, b);
+            } else {
+              ctx.fillStyle = 'rgba(255,196,92,' + b.toFixed(3) + ')';
+              ctx.beginPath(); ctx.arc(i * STEP + 7, j * STEP + 7, 1.4 + 1.1 * b, 0, 6.2832); ctx.fill();
+            }
           } else if (b) { lit[n] = 0; }
         }
       }
@@ -143,16 +163,27 @@
     }
     host.addEventListener('pointermove', function (e) {
       var r = host.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
+      if (BLOCKS) {
+        var x1 = px === null ? x : px, y1 = py === null ? y : py, steps = Math.max(1, Math.ceil(Math.hypot(x - x1, y - y1) / (STEP / 2)));
+        for (var s = 1; s <= steps; s++) {
+          var ci = Math.floor((x1 + (x - x1) * s / steps) / STEP), cj = Math.floor((y1 + (y - y1) * s / steps) / STEP);
+          if (ci >= 0 && ci < cols && cj >= 0 && cj < rows) lit[cj * cols + ci] = 1;
+        }
+        px = x; py = y;
+        if (!raf) { last = performance.now(); raf = requestAnimationFrame(frame); }
+        return;
+      }
       var i0 = Math.max(0, Math.floor((x - RADIUS) / STEP)), i1 = Math.min(cols - 1, Math.ceil((x + RADIUS) / STEP));
       var j0 = Math.max(0, Math.floor((y - RADIUS) / STEP)), j1 = Math.min(rows - 1, Math.ceil((y + RADIUS) / STEP));
       for (var j = j0; j <= j1; j++) {
         for (var i = i0; i <= i1; i++) {
-          var d = Math.hypot(i * STEP + 7 - x, j * STEP + 7 - y);
+          var d = Math.hypot(i * STEP + STEP / 2 - x, j * STEP + STEP / 2 - y);
           if (d < RADIUS) { var v = 1 - d / RADIUS, n = j * cols + i; if (v > lit[n]) lit[n] = v; }
         }
       }
       if (!raf) { last = performance.now(); raf = requestAnimationFrame(frame); }
     });
+    host.addEventListener('pointerleave', function () { px = null; py = null; });
     size();
     if (window.ResizeObserver) { new ResizeObserver(size).observe(host); } else { window.addEventListener('resize', size); }
   });
