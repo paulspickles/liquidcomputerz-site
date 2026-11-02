@@ -1,0 +1,22 @@
+/* Shared styles used by every page. Edit here to change the whole site. */
+:focus-visible { outline: 3px solid #f2a93b; outline-offset: 3px; }
+.dots { background-image: radial-gradient(rgba(230,178,90,.22) 1.4px, transparent 1.6px); background-size: 14px 14px; }
+.glow { text-shadow: 0 0 22px rgba(242,169,59,.35); }
+.px-btn { box-shadow: 4px 4px 0 #5c370b; transition: transform .1s, box-shadow .1s; }
+    .px-btn:hover { transform: translate(2px,2px); box-shadow: 2px 2px 0 #5c370b; }
+.logo-link { --px-w: clamp(14px, calc((100vw - 72rem) / 2 + 12px), 72px); position: relative; display: inline-block; }
+    .logo-link img { position: relative; z-index: 1; transform-origin: center; transition: transform .3s cubic-bezier(.2,.8,.2,1); }
+    .logo-link:hover img, .logo-link:focus-visible img { transform: scale(1.18); }
+    .logo-link::before, .logo-link::after { content: ""; position: absolute; top: 50%; width: 0; height: 16px; margin-top: -8px; pointer-events: none; background: repeating-linear-gradient(90deg, #e6b25a 0 8px, transparent 8px 12px) 0 0 / 100% 4px no-repeat, repeating-linear-gradient(90deg, #e6b25a 0 8px, transparent 8px 12px) 0 100% / 100% 4px no-repeat, linear-gradient(#e6b25a, #e6b25a) var(--cap) 50% / 6px 100% no-repeat; }
+    .logo-link::before { --cap: 0%; right: calc(100% + 20px); }
+    .logo-link::after { --cap: 100%; left: calc(100% + 23px); }
+    @keyframes px-grow { from { width: 0; } to { width: var(--px-w); } }
+    @keyframes px-shrink { from { width: var(--px-w); } to { width: 0; } }
+    @media (hover: hover) and (min-width: 1024px) {
+      .logo-link.retract::before, .logo-link.retract::after { animation: px-shrink .45s steps(9) forwards; }
+      .logo-link:hover::before, .logo-link:hover::after, .logo-link:focus-visible::before, .logo-link:focus-visible::after { animation: px-grow .45s steps(9) forwards; }
+    }
+    @keyframes px-blink { 50% { opacity: .55; } }
+    @media (prefers-reduced-motion: no-preference) and (hover: hover) and (min-width: 1024px) { .logo-link:hover::before, .logo-link:hover::after { animation: px-grow .45s steps(9) forwards, px-blink 1s steps(2) .5s infinite; } }
+    @media (prefers-reduced-motion: reduce) and (hover: hover) and (min-width: 1024px) { .logo-link:hover::before, .logo-link:hover::after, .logo-link:focus-visible::before, .logo-link:focus-visible::after { animation: none; width: var(--px-w); } .logo-link.retract::before, .logo-link.retract::after { animation: none; } }
+.dots-lit { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
