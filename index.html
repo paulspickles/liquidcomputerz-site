@@ -46,13 +46,15 @@
     li:has(> .trend-icon) { position: relative; transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s, border-color .35s; }
     li:has(> .trend-icon):hover { transform: scale(1.1); z-index: 5; border-color: #e6b25a; box-shadow: 6px 6px 0 #5c370b; }
     
-    .binary-rain { position: absolute; inset: 0; overflow: hidden; pointer-events: none; -webkit-mask-image: linear-gradient(to bottom, transparent, #000 15%, #000 85%, transparent); mask-image: linear-gradient(to bottom, transparent, #000 15%, #000 85%, transparent); }
+    .binary-rain { position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden; pointer-events: none; -webkit-mask-image: linear-gradient(to bottom, transparent, #000 15%, #000 85%, transparent); mask-image: linear-gradient(to bottom, transparent, #000 15%, #000 85%, transparent); }
     .binary-rain .col { position: absolute; top: 0; font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 14px; line-height: 18px; white-space: pre; color: rgba(230,178,90,.12); will-change: transform; }
     .binary-rain b { font-weight: 500; color: rgba(242,169,59,.5); text-shadow: 0 0 8px rgba(242,169,59,.5); }
     .ticker { display: flex; width: max-content; animation: slide 38s linear infinite; }
-    .ticker:hover { animation-play-state: paused; }
+    .ticker:hover, .ticker.is-paused { animation-play-state: paused; }
+    .ticker-btn { position: absolute; right: .5rem; top: 50%; transform: translateY(-50%); z-index: 2; border: 2px solid #4a3719; background: #14100a; color: #f1e4c9; padding: .15rem .8rem; font-size: .9rem; font-weight: 600; }
+    .ticker-btn:hover { border-color: #e6b25a; color: #e6b25a; }
     @keyframes slide { to { transform: translateX(-50%); } }
-    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto !important; } .ticker { animation: none; } }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto !important; } .ticker { animation: none; } .ticker-btn { display: none; } }
     .bullets li { position: relative; padding-left: 1.1rem; }
     .bullets li::before { content: ""; position: absolute; left: 0; top: .6em; width: 7px; height: 7px; background: #e6b25a; }
 
@@ -95,10 +97,10 @@
 <body class="bg-bg text-cream font-sans antialiased leading-relaxed">
   
   <div id="boot">
-    <div class="boot-stage">
+    <div class="boot-stage" aria-hidden="true">
       <div class="boot-screen" aria-hidden="true">
         <div class="screen-text">
-          <p class="screen-title">LIQUIDCOMPUTERZ</p>
+          <div class="screen-title">LIQUIDCOMPUTERZ</div>
         </div>
         <div class="boot-scan"></div>
         <div class="boot-flash"></div>
@@ -137,11 +139,14 @@
     </section>
 
     <!-- LED ticker -->
-    <div class="bg-black border-b-2 border-rim overflow-hidden py-3" aria-hidden="true">
+    <div class="relative bg-black border-b-2 border-rim overflow-hidden py-3">
+      <div aria-hidden="true">
       <div class="ticker font-pixel text-xl text-gold whitespace-nowrap">
         <ul class="flex shrink-0 gap-10 pr-10"><li>Computer Repair</li><li>Printer Setup</li><li>Network Installation</li><li>Website Design</li><li>Data Recovery</li><li>Managed Backup</li><li>Virus Removal</li><li>VoIP Phones</li><li>Security Cameras</li><li>I.T. Audits</li></ul>
         <ul class="flex shrink-0 gap-10 pr-10" aria-hidden="true"><li>Computer Repair</li><li>Printer Setup</li><li>Network Installation</li><li>Website Design</li><li>Data Recovery</li><li>Managed Backup</li><li>Virus Removal</li><li>VoIP Phones</li><li>Security Cameras</li><li>I.T. Audits</li></ul>
       </div>
+      </div>
+      <button type="button" id="ticker-toggle" class="ticker-btn" aria-pressed="false" aria-label="Pause scrolling services">Pause</button>
     </div>
 
     <!-- Featured -->
@@ -173,7 +178,7 @@
 
     <!-- All services -->
     <section id="services" class="relative overflow-hidden bg-panel border-y-2 border-rim scroll-mt-4" aria-labelledby="services-heading">
-      <div class="binary-rain" aria-hidden="true"></div>
+      <canvas class="binary-rain" aria-hidden="true"></canvas>
       <div class="relative mx-auto max-w-6xl px-5 py-16">
         <h2 id="services-heading" class="mx-auto w-fit bg-panel/90 backdrop-blur-sm border-2 border-rim px-6 py-3 text-center font-pixel font-bold text-3xl md:text-4xl text-gold">Our Services</h2>
         <div class="mt-10 grid md:grid-cols-3 gap-10 bg-panel/90 backdrop-blur-sm border-2 border-rim p-6 md:p-8">
@@ -237,6 +242,12 @@
       buildTicker();
       if (document.fonts && document.fonts.ready) document.fonts.ready.then(buildTicker);
       window.addEventListener('resize', function () { clearTimeout(tkTimer); tkTimer = setTimeout(buildTicker, 200); });
+      var tkBtn = document.getElementById('ticker-toggle');
+      if (tkBtn) tkBtn.addEventListener('click', function () {
+        var on = tk.classList.toggle('is-paused');
+        tkBtn.setAttribute('aria-pressed', String(on)); tkBtn.textContent = on ? 'Play' : 'Pause';
+        tkBtn.setAttribute('aria-label', on ? 'Play scrolling services' : 'Pause scrolling services');
+      });
       var lapShell = document.getElementById('lid-shell'), lapGlow = document.getElementById('lid-glow'), lapCard = lapShell.closest('li');
       function lapPt(X, Y, Z) { return [2 + X + Y, 14 + X * 0.5 - Y * 0.5 - Z]; }
       function lapPath(beta, x0, x1, v0, v1) {
@@ -345,25 +356,39 @@
         mkCard.addEventListener('mouseenter', function () { mkOn = true; mkLast = performance.now(); if (!mkRaf) mkRaf = requestAnimationFrame(mkLoop); });
         mkCard.addEventListener('mouseleave', function () { mkOn = false; mkStop = 21 + 12 * Math.ceil((mkTx - 21) / 12 - 1e-6); });
       }
-      var svc = document.getElementById('services'), rain = svc.querySelector('.binary-rain'), rainCols = [], RAIN_TRAVEL = 700, rainTimer = 0, rainTick = false;
+      var svc = document.getElementById('services'), rain = svc.querySelector('.binary-rain'), rctx = rain.getContext && rain.getContext('2d');
+      var rainCols = [], RAIN_TRAVEL = 700, RAIN_X = 22, RAIN_Y = 18, rainTimer = 0, rainTick = false, rdpr = 1;
       function rainUpdate() {
+        if (!rctx || !rainCols.length) return;
         var r = svc.getBoundingClientRect(), vh = window.innerHeight;
         if (r.bottom < 0 || r.top > vh) return;
         var p = Math.max(0, Math.min(1, (vh - r.top) / (vh + r.height)));
+        rctx.clearRect(0, 0, rain.width, rain.height);
         for (var i = 0; i < rainCols.length; i++) {
           var sp = 0.45 + ((i * 37) % 55) / 100;
           var y = (i % 2) ? -RAIN_TRAVEL + p * RAIN_TRAVEL * sp : -p * RAIN_TRAVEL * sp;
-          rainCols[i].style.transform = 'translateY(' + y.toFixed(1) + 'px)';
+          rctx.drawImage(rainCols[i], Math.round(i * RAIN_X * rdpr), Math.round(y * rdpr));
         }
       }
       function buildRain() {
-        var n = Math.ceil(svc.clientWidth / 22), rows = Math.ceil((svc.clientHeight + RAIN_TRAVEL) / 18), out = '';
+        if (!rctx) return;
+        rdpr = Math.min(2, window.devicePixelRatio || 1);
+        var w = svc.clientWidth, h = svc.clientHeight;
+        rain.width = Math.round(w * rdpr); rain.height = Math.round(h * rdpr);
+        var n = Math.ceil(w / RAIN_X), rows = Math.ceil((h + RAIN_TRAVEL) / RAIN_Y);
+        rainCols = [];
         for (var i = 0; i < n; i++) {
-          var t = '';
-          for (var j = 0; j < rows; j++) { var d = Math.random() < 0.5 ? '0' : '1'; t += (Math.random() < 0.03 ? '<b>' + d + '</b>' : d) + '\n'; }
-          out += '<div class="col" style="left:' + (i * 22) + 'px">' + t + '</div>';
+          var c = document.createElement('canvas'); c.width = Math.ceil(RAIN_X * rdpr); c.height = Math.ceil(rows * RAIN_Y * rdpr);
+          var g = c.getContext('2d'); g.scale(rdpr, rdpr); g.font = '14px ui-monospace, Consolas, monospace'; g.textBaseline = 'top';
+          for (var j = 0; j < rows; j++) {
+            var d = Math.random() < 0.5 ? '0' : '1';
+            if (Math.random() < 0.03) { g.fillStyle = 'rgba(242,169,59,.5)'; g.shadowColor = 'rgba(242,169,59,.5)'; g.shadowBlur = 8; }
+            else { g.fillStyle = 'rgba(230,178,90,.12)'; g.shadowBlur = 0; }
+            g.fillText(d, 0, j * RAIN_Y + 2);
+          }
+          rainCols.push(c);
         }
-        rain.innerHTML = out; rainCols = rain.children; rainUpdate();
+        rainUpdate();
       }
       buildRain();
       if (window.ResizeObserver) { new ResizeObserver(function () { clearTimeout(rainTimer); rainTimer = setTimeout(buildRain, 150); }).observe(svc); }

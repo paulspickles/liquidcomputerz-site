@@ -17,7 +17,7 @@
       </button>
       <nav id="nav" aria-label="Primary" class="hidden md:block absolute md:static left-0 right-0 top-full bg-bg md:bg-transparent border-b-2 border-rim md:border-0 z-40">
         <ul class="mx-auto max-w-6xl px-5 py-3 md:p-0 flex flex-col md:flex-row md:items-center gap-1 md:gap-6 text-sm">
-          <li><a class="block py-2 font-semibold hover:text-gold" href="{{root}}">Home</a></li>
+          
           <li><a class="block py-2 font-semibold hover:text-gold" href="{{root}}tech-news-wpb/">Tech News WPB</a></li>
           <li class="relative group">
             <a class="block py-2 font-semibold hover:text-gold" href="{{root}}#services">Our Services</a>
