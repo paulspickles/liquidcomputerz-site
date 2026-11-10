@@ -65,7 +65,10 @@
           <label class="block text-sm font-semibold">Message <span class="text-gold">(required)</span>
             <textarea name="message" rows="6" required class="mt-1 w-full bg-bg border-2 border-rim px-3 py-2 font-normal text-cream focus:border-gold"></textarea>
           </label>
-          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true">
+          <div class="hidden" aria-hidden="true">
+            <label for="contact-trap">Leave this field empty</label>
+            <input type="text" id="contact-trap" name="_gotcha" tabindex="-1" autocomplete="off" aria-label="Leave this field empty">
+          </div>
           <input type="hidden" name="access_key" value="854bba85-620b-42ae-b245-c8833a493c45">
           <input type="hidden" name="subject" value="New message from the LiquidComputerz website">
           <input type="hidden" name="from_name" value="LiquidComputerz Website">
